@@ -8,8 +8,7 @@ const getAllSubCategories = catchError(async (req, res, next) => {
   let filterObject = {};
   if (req.params.category) filterObject.category = req.params.category;
   let apiFeather=new ApiFeather(SubCategoryModel.find(filterObject),req.query).pagination().sort().filter().fields().search()
-  let subCategories=await apiFeather.mongosseQuery
-
+  let subCategories=await apiFeather.mongosseQuery;
   res.json({ message: "Success",pageNumber:apiFeather.pageNumber ,subCategories });
 
 });
