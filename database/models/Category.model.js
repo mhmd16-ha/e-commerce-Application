@@ -26,7 +26,7 @@ createdBy:{
     versionKey:false
 })
 schema.post('init',function(doc){
-doc.image="http://localhost:3000/uploads/categories/"+doc.image
+doc.image=process.env.BASE_ERL+"categories/"+doc.image
 })
 const CategoryModel=mongoose.model('Category',schema)
 export default CategoryModel

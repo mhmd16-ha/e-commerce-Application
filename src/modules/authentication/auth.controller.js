@@ -12,7 +12,7 @@ res.json({message:"success",token})
 const signIn=catchError(async(req,res,next)=>{
 let user=await User.findOne({email:req.body.email})
 if(user&&bcrypt.compareSync(req.body.password,user.password)){
-    let token=jwt.sign({UserId:user._id,role:user.role},"mhmd")
+    let token=jwt.sign({UserId:user._id,role:user.role},process.env.JWT_KEY)
     res.json({message:"success",token})
 }
 next(new ErrorApp('email or password is error',401))
@@ -22,7 +22,7 @@ const changePassword=catchError(async(req,res,next)=>{
 let user=await User.findOne({email:req.body.email})
 if(user&&bcrypt.compareSync(req.body.oldpassword,user.password)){
 let user=await User.findOneAndUpdate({email:req.body.email},{password:req.body.newpassword,passwordChangedAt:Date.now()})
-    let token=jwt.sign({UserId:user._id,role:user.role},"mhmd")
+    let token=jwt.sign({UserId:user._id,role:user.role},process.env.JWT_KEY)
     res.json({message:"success",token})
 }
 next(new ErrorApp('email or password is error',401))
@@ -31,7 +31,7 @@ const protectRoutes=catchError(async(req,res,next)=>{
 let {token}=req.headers;
 let userPayload=null;
 if(!token) return next(new ErrorApp('token not provided',401))
-jwt.verify(token,"mhmd",(err,payload)=>{
+jwt.verify(token,process.env.JWT_KEY,(err,payload)=>{
     if(err) next(new ErrorApp(err,401))
     userPayload=payload
 })

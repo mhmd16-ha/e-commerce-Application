@@ -63,8 +63,8 @@ createdBy:{
     versionKey:false
 })
 schema.post('init',function(doc){
-   if(doc.imageCover) doc.imageCover="http://localhost:3000/uploads/products/"+doc.imageCover
-   if(doc.images) doc.images=doc.images.map(img=>"http://localhost:3000/uploads/products/"+img)
+   if(doc.imageCover) doc.imageCover=process.env.BASE_ERL+"products/"+doc.imageCover
+   if(doc.images) doc.images=doc.images.map(img=>process.env.BASE_ERL+"products/"+img)
     })
 const ProductModel=mongoose.model('Product',schema)
 export default ProductModel

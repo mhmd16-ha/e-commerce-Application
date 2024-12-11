@@ -3,6 +3,9 @@ import { globalError } from './middleware/globalErrors.js';
 import { ErrorApp } from './src/utils/ErrorApp.js';
 import { bootstrap } from './src/modules/bootstrap.js';
 import { dbconn } from "./database/dbConnection.js";
+// import dotenv from 'dotenv'
+// dotenv.config()
+import 'dotenv/config'
 
 const app = express();
 const port = 3000;

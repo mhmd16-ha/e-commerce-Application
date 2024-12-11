@@ -23,7 +23,7 @@ logo:String
     versionKey:false
 })
 schema.post('init',function(doc){
-    doc.logo="http://localhost:3000/uploads/brands/"+doc.logo
+    doc.logo=process.env.BASE_ERL+"brands/"+doc.logo
     })
 const BrandModel=mongoose.model('Brand',schema)
 export default BrandModel
