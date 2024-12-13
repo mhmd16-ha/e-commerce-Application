@@ -6,7 +6,7 @@ import { ErrorApp } from './../../utils/ErrorApp.js';
 const signUp=catchError(async(req,res,next)=>{
 let user=new User(req.body)
 await user.save()
-let token=jwt.sign({UserId:user._id,role:user.role},"mhmd")
+let token=jwt.sign({UserId:user._id,role:user.role},process.env.JWT_KEY)
 res.json({message:"success",token})
 })
 const signIn=catchError(async(req,res,next)=>{

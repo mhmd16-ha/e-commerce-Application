@@ -5,6 +5,7 @@ import brandRouter from './brand/brands.routes.js';
 import productRouter from './product/products.routes.js';
 import usersRouter from './user/users.routes.js';
 import authRouter from './authentication/auth.routes.js';
+import ReviewRouter from './review/reviews.routes.js';
 
 
 
@@ -15,4 +16,5 @@ export const bootstrap=(app)=>{
     app.use('/api/v1/products',productRouter)
     app.use('/api/v1/users',usersRouter)
     app.use('/api/v1/auth',authRouter)
+    app.use('/api/v1/reviews',ReviewRouter)
 }

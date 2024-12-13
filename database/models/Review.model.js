@@ -23,5 +23,8 @@ product:{
     timestamps:true,
     versionKey:false
 })
+schema.pre(/^find/,function(){
+    this.populate("user","name");
+})
 const Review=mongoose.model('Review',schema)
 export default Review
