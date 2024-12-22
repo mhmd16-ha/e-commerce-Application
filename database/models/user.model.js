@@ -13,7 +13,11 @@ role:{
     enum:['admin','user'],
     default:'user'
 },
-passwordChangedAt:Date
+passwordChangedAt:Date,
+wishList:[{
+    type:Types.ObjectId,
+    ref:"Product"
+}]
 },{
     timestamps:true,
     versionKey:false

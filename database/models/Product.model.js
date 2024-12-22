@@ -60,11 +60,21 @@ createdBy:{
 }
 },{
     timestamps:true,
-    versionKey:false
+    versionKey:false,
+    toJSON:{virtuals:true},
+    toObject:{virtuals:true}
 })
 schema.post('init',function(doc){
    if(doc.imageCover) doc.imageCover=process.env.BASE_ERL+"products/"+doc.imageCover
    if(doc.images) doc.images=doc.images.map(img=>process.env.BASE_ERL+"products/"+img)
+    })
+schema.virtual('myReview', {
+        ref: 'Review',
+        localField: '_id',
+        foreignField: 'product',
+      });
+ schema.pre(/^find/,function(){
+        this.populate("myReview");
     })
 const ProductModel=mongoose.model('Product',schema)
 export default ProductModel
